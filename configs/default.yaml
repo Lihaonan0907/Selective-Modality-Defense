@@ -1,0 +1,77 @@
+device: cuda:0
+seed: 42
+
+paths:
+  include: configs/paths.yaml
+
+proposal:
+  input_size: 960
+  conf_thres: 0.01
+  iou_thres: 0.45
+  max_det: 30
+  padding: 25
+  clahe_clip_limit: 2.0
+  clahe_tile_grid_size: [8, 8]
+
+attribution:
+  tau_vis: 0.90
+  tau_ir: 0.65
+  dominance_margin: 0.10
+  hidden_dim: 64
+  evidence_dim: 32
+  use_learned_fusion: true
+  use_both_to_single_demotion: true
+  preview_dilate: 7
+  mask_dilate: 5
+  min_mask_area: 80
+
+mask:
+  dilation_kernel: 5
+  min_area: 80
+  empty_policy: keep_original
+
+restoration:
+  steps: 40
+  guidance_scale: 7.5
+  strength: 0.85
+  visible_prompt: a night street scene, asphalt road, pedestrians, highly detailed, realistic
+  visible_negative_prompt: colorful blocks, yellow patches, glowing artifacts, deformed, noisy, bright daytime
+  infrared_prompt: smooth thermal infrared imaging, grayscale, pedestrians, street, sharp edges, high contrast, highly detailed
+  infrared_negative_prompt: colorful, glowing, bloated, blurry, melting, deformed, noisy, patches, bright daylight
+  train:
+    resolution: 512
+    batch_size: 1
+    epochs: 30
+    lr: 0.00001
+    weight_decay: 0.0001
+    num_workers: 0
+    lambda_l1_global: 1.0
+    lambda_l1_local: 10.0
+    lambda_frequency: 0.01
+    lambda_gan: 0.1
+    lambda_tv: 0.005
+    lambda_ir_heat: 20.0
+    gan_start_epoch: 10
+    grad_clip: 1.0
+
+detector:
+  input_size: 640
+  conf_thres: 0.7
+  iou_thres: 0.5
+
+single_branch:
+  evidence:
+    inpaint_radius: 5
+    preview_dilate: 7
+    det_overlap_threshold: 0.30
+  attribution:
+    hidden_dim: 64
+    evidence_dim: 32
+    dropout: 0.10
+    tau_vis: 0.90
+    tau_ir: 0.65
+  proposal:
+    input_channels: 3
+  mask:
+    dilation_kernel: 5
+    min_component_area: 80

@@ -1,0 +1,16 @@
+proposal:
+  backend: ultralytics_yolo
+  class_names: [anomaly_patch]
+
+attribution:
+  backend: drf_ma
+  fusion: learned
+
+restoration:
+  backend: stable_diffusion_inpaint
+  dtype: fp16
+
+detector:
+  backend: ultralytics_yolo
+  target_class_id: 0
+

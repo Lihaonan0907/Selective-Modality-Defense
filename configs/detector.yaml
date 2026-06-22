@@ -1,0 +1,6 @@
+detector:
+  input_size: 640
+  conf_thres: 0.7
+  iou_thres: 0.5
+  target_class_id: 0
+

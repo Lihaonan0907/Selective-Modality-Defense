@@ -1,0 +1,9 @@
+proposal:
+  input_size: 960
+  conf_thres: 0.01
+  iou_thres: 0.45
+  max_det: 30
+  padding: 25
+  clahe_clip_limit: 2.0
+  clahe_tile_grid_size: [8, 8]
+

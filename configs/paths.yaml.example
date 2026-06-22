@@ -1,0 +1,27 @@
+# Copy this file to configs/paths.yaml and replace the placeholders with
+# machine-local absolute paths. configs/paths.yaml is ignored by Git.
+
+data_root: /absolute/path/to/dataset_publishable
+output_root: /absolute/path/to/outputs
+
+# Optional. Required only by the legacy compatibility wrappers in
+# scripts/train_proposal.py, scripts/train_detector.py, or paired DRF-MA
+# adapter experiments.
+legacy_code_root:
+
+checkpoints:
+  proposal: /absolute/path/to/proposal.pt
+  drf_ma: /absolute/path/to/drf_ma.pt
+  vis_restorer: /absolute/path/to/vis_restorer.pt
+  ir_restorer: /absolute/path/to/ir_restorer.pt
+  vis_detector: /absolute/path/to/vis_detector.pt
+  ir_detector: /absolute/path/to/ir_detector.pt
+  prototypes:
+  single_branch:
+    vis_proposal: /absolute/path/to/vis_single_branch_proposal.pt
+    ir_proposal: /absolute/path/to/ir_single_branch_proposal.pt
+    vis_attribution: /absolute/path/to/vis_single_branch_attribution.pt
+    ir_attribution: /absolute/path/to/ir_single_branch_attribution.pt
+
+models:
+  stable_diffusion_inpaint: /absolute/path/to/stable-diffusion-inpainting

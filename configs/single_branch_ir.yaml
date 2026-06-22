@@ -1,0 +1,40 @@
+device: cuda:0
+seed: 42
+
+paths:
+  include: configs/paths.yaml
+
+single_branch:
+  mode: ir
+  data_root:
+  output_dir: outputs/single_branch_ir
+  proposal:
+    input_channels: 3
+    input_size: 960
+    conf_thres: 0.01
+    iou_thres: 0.45
+    max_det: 30
+    padding: 25
+    clahe_clip_limit: 2.0
+    clahe_tile_grid_size: [8, 8]
+  evidence:
+    inpaint_radius: 5
+    preview_dilate: 7
+    det_overlap_threshold: 0.30
+  attribution:
+    tau_ir: 0.65
+    hidden_dim: 64
+    evidence_dim: 32
+    dropout: 0.10
+  labels:
+    attr_iou_threshold: 0.50
+  mask:
+    dilation_kernel: 5
+    min_component_area: 80
+  train:
+    lr: 0.0001
+    weight_decay: 0.0001
+    batch_size: 256
+    epochs: 50
+    num_workers: 0
+    early_stop_patience: 10

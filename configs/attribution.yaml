@@ -1,0 +1,16 @@
+attribution:
+  tau_vis: 0.90
+  tau_ir: 0.65
+  dominance_margin: 0.10
+  hidden_dim: 64
+  evidence_dim: 32
+  use_learned_fusion: true
+  use_both_to_single_demotion: true
+  preview_dilate: 7
+  mask_dilate: 5
+  min_mask_area: 80
+
+mask:
+  dilation_kernel: 5
+  min_area: 80
+

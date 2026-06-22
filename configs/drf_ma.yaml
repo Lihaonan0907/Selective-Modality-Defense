@@ -1,0 +1,89 @@
+device: cuda:0
+seed: 42
+output_dir: outputs/drf_ma
+
+paths:
+  include: configs/paths.yaml
+
+dataset:
+  # Leave empty to use paths.data_root from configs/paths.yaml.
+  root:
+  splits:
+    train: train
+    val: val
+  attacks:
+    - ADP
+    - LaVAN
+    - DM-NAP
+    - GNAP
+    - AdvCloth
+    - BulbAttack
+    - HBlock
+    - AdvIB
+    - Crossattack
+    - IPatch
+    - MAP
+    - MIC
+  image_extensions: [".jpg", ".png", ".jpeg", ".bmp"]
+  include_clean_pairs: true
+  max_images_per_attack:
+
+labels:
+  iou_threshold: 0.30
+  mask_cover_threshold: 0.30
+
+proposal:
+  cache_dir:
+  fallback: patch_and_person
+  allow_oracle_fallback_splits: [train]
+  max_proposals: 30
+  jitter_count: 1
+  jitter_scale: 0.12
+  seed: 42
+
+evidence:
+  lambda_pix: 1.0
+  lambda_feat: 0.5
+  inpaint_radius: 5
+  preview_dilate: 7
+  det_overlap_threshold: 0.30
+
+model:
+  cm_dim: 4
+  self_dim: 4
+  rep_dim: 2
+  det_dim: 1
+  hidden_dim: 64
+  evidence_dim: 32
+  dropout: 0.10
+  ablate: {}
+
+loss:
+  lambda_rank: 0.5
+  lambda_both: 1.0
+  lambda_clean: 0.3
+  gamma: 0.2
+  tau_b: 0.7
+
+thresholds:
+  tau_vis: 0.90
+  tau_ir: 0.65
+  dominance_margin: 0.10
+  tau_vis_values: [0.80, 0.85, 0.90, 0.95, 1.00]
+  tau_ir_values: [0.55, 0.60, 0.65, 0.70, 0.75]
+
+train:
+  optimizer: AdamW
+  lr: 0.0001
+  weight_decay: 0.0001
+  batch_size: 256
+  epochs: 80
+  scheduler: cosine
+  early_stop_patience: 15
+  num_workers: 0
+  grad_clip: 5.0
+
+cache:
+  evidence_dir: outputs/drf_ma/evidence_cache
+  rebuild: false
+  suffix:

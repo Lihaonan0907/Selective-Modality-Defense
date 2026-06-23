@@ -85,6 +85,29 @@ Required for single-branch inference:
 
 `paths.legacy_code_root` is optional. It is only needed by the legacy compatibility wrappers for four-channel proposal, task-detector training, or paired DRF-MA adapter experiments.
 
+## Dataset Access
+
+The released LLVIP-based visible-infrared adversarial patch benchmark can be downloaded from Google Drive:
+
+[Download the LLVIP adversarial patch benchmark](https://drive.google.com/drive/folders/13hwb3Vw6l5VBDOk7z5xU1ez4I0kEsyJV?usp=sharing)
+
+The benchmark contains paired visible-infrared samples for visible-only, infrared-only, and cross-modal adversarial patch evaluation. Each sample is organized with consistent visible/infrared filenames, pedestrian annotations, patch annotations, and attack-modality metadata. For modality-asymmetric attacks, the non-attacked modality is kept as the corresponding clean image and assigned an empty patch label.
+
+After downloading the dataset, update the local dataset path in:
+
+```bash
+configs/paths.yaml
+```
+
+For example:
+
+```yaml
+paths:
+  data_root: /path/to/LLVIP_adversarial_patch_benchmark
+```
+
+Datasets and generated outputs are not tracked by Git. Please keep downloaded data outside the repository or under a local directory ignored by `.gitignore`.
+
 ## Quick Start
 
 Paired visible-infrared inference:
